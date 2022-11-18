@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="{{ url_for('static', filename='img/MK-favicon-32x32.png')}}">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600&display=swap" rel="stylesheet">
+
+        <title>MK-dev Multi</title>
+        <!-- Bootstrap CSS -->
+
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/linericon/style.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/owl-carousel/owl.carousel.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/lightbox/simpleLightbox.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/nice-select/css/nice-select.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/animate-css/animate.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/flaticon/flaticon.css')}}">
+<!--         main css-->
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css')}}">
+    </head>
+    <body>
+
+        <!--================Header Menu Area =================-->
+        {% include "header.html" %}
+        <!--================Header Menu Area =================-->
+
+        <!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>Portfolio Details</h2>
+						<div class="page_link">
+							<a href="{{url_for('home')}}">Home</a>
+							<a href="{{url_for('portfolio')}}">Portfolio</a>
+							<a href="">Portfolio Details</a>
+						</div>
+
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+        <!--================Portfolio Details Area =================-->
+        <section class="portfolio_details_area p_120">
+        	<div class="container">
+        		<div class="portfolio_details_inner">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="left_img">
+								<img class="img-fluid" src="{{project.img_url}}" alt="">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="portfolio_right_text">
+								<h4>{{project.name}}</h4>
+								<p> {{project.overview}}</p>
+								<ul class="list">
+									<li><span>Rating</span>: <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></li>
+									<li><span>Client</span>: {{project.client}}  </li>
+									<li><span>Website</span>:  colorlib.com</li>
+									<li><span>Completed</span>:  {{ project.date.year }}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+<!--       				<h3 style="color: #0f1b61">Description</h3>-->
+       				<p> {{ project.description }}</p>
+					{% if project.challenge  %}
+					<h3 style="color: #0f1b61">Challenge</h3>
+					<p> {{ project.challenge }}</p>
+                    <div class="left_img">
+								<img class="img-fluid" src="{{project.challenge_img_url}}" alt="">
+							</div>
+					<h3 style="color: #0f1b61">Solution</h3>
+					<p> {{ project.solution }}</p>
+					{% endif %}
+
+        		</div>
+        	</div>
+        </section>
+        <!--================End Portfolio Details Area =================-->
+
+        <!--================Footer Area =================-->
+       {% include "footer.html" %}
+        <!--================End Footer Area =================-->
+
+
+
+
+       <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="{{url_for('static', filename='js/jquery-3.2.1.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/popper.js')}}"></script>
+        <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/stellar.js')}}"></script>
+        <script src="{{url_for('static', filename='vendors/lightbox/simpleLightbox.min.js')}}"></script>
+        <script src="{{url_for('static', filename='vendors/nice-select/js/jquery.nice-select.min.js')}}"></script>
+        <script src="{{url_for('static', filename='vendors/isotope/imagesloaded.pkgd.min.js')}}"></script>
+        <script src="{{url_for('static', filename='vendors/isotope/isotope-min.js')}}"></script>
+        <script src="{{url_for('static', filename='vendors/owl-carousel/owl.carousel.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/jquery.ajaxchimp.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/mail-script.js')}}"></script>
+        <script src="{{url_for('static', filename='vendors/counter-up/jquery.waypoints.min.js')}}"></script>
+        <script src="{{url_for('static', filename='vendors/counter-up/jquery.counterup.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/theme.js')}}"></script>
+    </body>
+</html>
