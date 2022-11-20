@@ -37,11 +37,11 @@
             	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
 				<div class="container">
 					<div class="banner_content text-center">
-						<h2>Portfolio Details</h2>
+						<h2>{{project.name}}</h2>
 						<div class="page_link">
 							<a href="{{url_for('home')}}">Home</a>
-							<a href="{{url_for('portfolio')}}">Portfolio</a>
-							<a href="">Portfolio Details</a>
+							<a href="{{url_for('portfolio')}}">Projects</a>
+							<a href="">project details</a>
 						</div>
 
 					</div>
@@ -50,7 +50,7 @@
         </section>
         <!--================End Home Banner Area =================-->
 
-        <!--================Portfolio Details Area =================-->
+        <!--================project details Area =================-->
         <section class="portfolio_details_area p_120">
         	<div class="container">
         		<div class="portfolio_details_inner">
@@ -65,10 +65,13 @@
 								<h4>{{project.name}}</h4>
 								<p> {{project.overview}}</p>
 								<ul class="list">
-									<li><span>Rating</span>: <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></li>
+									<li><span>Rating</span>: {{project.rating }} <i class="fa fa-star"></i></li>
 									<li><span>Client</span>: {{project.client}}  </li>
-									<li><span>Website</span>:  colorlib.com</li>
-									<li><span>Completed</span>:  {{ project.date.year }}</li>
+									{% if project.website %}
+									<li><span>Website</span>:  {{project.website}}</li>
+									{% endif %}
+									<li><span>GitHub-link</span>:  <a href="{{project.github_url}}">check code page</a></li>
+									<li><span>Completed</span>:  {{ project.date.month }}/{{ project.date.year }}</li>
 								</ul>
 							</div>
 						</div>
@@ -88,7 +91,7 @@
         		</div>
         	</div>
         </section>
-        <!--================End Portfolio Details Area =================-->
+        <!--================End project details Area =================-->
 
         <!--================Footer Area =================-->
        {% include "footer.html" %}

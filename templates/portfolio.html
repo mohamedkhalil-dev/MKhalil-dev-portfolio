@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="static/css/style.css">
         <link rel="stylesheet" href="static/css/responsive.css">
     </head>
-    <body>
+    <d>
         
         <!--================Header Menu Area =================-->
         {% include "header.html" %}
@@ -35,10 +35,10 @@
             	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
 				<div class="container">
 					<div class="banner_content text-center">
-						<h2>Portfolio</h2>
+						<h2>Projects</h2>
 						<div class="page_link">
 							<a href="{{ url_for('home') }}">Home</a>
-							<a href="{{ url_for('portfolio') }}">Portfolio</a>
+							<a href="{{ url_for('portfolio') }}">Projects</a>
 						</div>
 						
 					</div>
@@ -48,7 +48,7 @@
         <!--================End Home Banner Area =================-->
         
         <!--================Projects Area =================-->
-               <section class="projects_area p_120">
+              <section class="projects_area p_120">
         	<div class="container">
         		<div class="main_title">
 					<h2>Our Recent Completed Projects</h2>
@@ -74,8 +74,11 @@
 						</div>
 					</div>
 					{% endfor%}
+				</div>
+        	</div>
+        </section>
         <!--================End Projects Area =================-->
-        
+
         <!--================Testimonials Area =================-->
         <section class="testimonials_area p_120">
         	<div class="container">
@@ -123,14 +126,17 @@
         	</div>
         </section>
         <!--================End Testimonials Area =================-->
-        
+
+
         <!--================Footer Area =================-->
        {% include "footer.html" %}
+
         <!--================End Footer Area =================-->
-        
-        
-        
-        
+
+
+
+
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="static/js/jquery-3.2.1.min.js"></script>
@@ -143,9 +149,12 @@
         <script src="static/vendors/isotope/isotope-min.js"></script>
         <script src="static/vendors/owl-carousel/owl.carousel.min.js"></script>
         <script src="static/js/jquery.ajaxchimp.min.js"></script>
-        <script src="static/js/mail-script.js"></script>
         <script src="static/vendors/counter-up/jquery.waypoints.min.js"></script>
         <script src="static/vendors/counter-up/jquery.counterup.min.js"></script>
+        <script src="static/js/mail-script.js"></script>
+        <!--gmaps Js-->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+        <script src="static/js/gmaps.min.js"></script>
         <script src="static/js/theme.js"></script>
     </body>
 </html>

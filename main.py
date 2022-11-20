@@ -21,9 +21,14 @@
 from flask import Flask, render_template, redirect, url_for, flash, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
+from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from datetime import datetime
 import os
 from forms import AddProjectForm
+
+SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver', 'Beautiful soup', 'Request', 'WTForms', 'HTML5',
+          'CSS', 'Bootstrap', 'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API',
+          'Authentication', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -32,6 +37,7 @@ Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL",  "sqlite:///projects.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "8BYkEfBA6O6donzWlSihBXox7C0sKR6b")
 
 ##Creating db for portfolio projects
 class Projects(db.Model):
@@ -51,8 +57,8 @@ class Projects(db.Model):
     img_url = db.Column(db.String(250), nullable=False)
     challenge_img_url = db.Column(db.String(250), nullable=False)
 
-db.create_all()
-
+# db.create_all()
+#
 # new_project = Projects(
 #     name="Phone new",
 #     overview="this is an overview",
@@ -68,13 +74,12 @@ db.create_all()
 # db.session.commit()
 
 
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "8BYkEfBA6O6donzWlSihBXox7C0sKR6b")
 
 
 @app.route('/')
 def home():
     all_projects = Projects.query.all()
-    return render_template('index.html', projects=all_projects)
+    return render_template('index.html', projects=all_projects, skills=SKILLS)
 
 @app.route('/add-project', methods=['GET', 'POST'])
 def add_project():
@@ -82,11 +87,12 @@ def add_project():
     if form.validate_on_submit():
         new_project = Projects(
             name=form.name.data,
+            client=form.client.data,
             overview=form.overview.data,
-            rating=int(form.rating.name),
+            rating=int(form.rating.data),
             website=form.website.data,
             languages=form.languages.data,
-            date=datetime(year=2002, month=11, day=3),
+            date=form.date.data,
             description=form.description.data,
             challenge=form.challenge.data,
             solution=form.solution.data,
@@ -103,7 +109,7 @@ def add_project():
 
 @app.route('/about')
 def about():
-    return render_template('about-us.html')
+    return render_template('about-us.html', skills=SKILLS)
 
 
 @app.route('/services')

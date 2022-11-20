@@ -316,10 +316,12 @@ button:focus {
         margin-bottom: 20px; }
       .home_banner_area .banner_inner .banner_content h2 {
         margin-top: 0px;
-        font-size: 3rem;
+        font-size: 4rem;
         font-weight: bold;
         font-family: 'Bitter', serif;
         color: #0f1b61;
+
+
 
         margin-bottom: 20px; }
       .home_banner_area .banner_inner .banner_content p {
@@ -2897,6 +2899,8 @@ h6 {
 ============================================================================================ */
 .portfolio_details_inner .row {
   margin-bottom: 65px; }
+.portfolio_details_inner .left_img .img-fluid {
+  border-radius: 20px; }
 .portfolio_details_inner p {
   margin-bottom: 30px;
   font-size: 14px; }
@@ -2927,6 +2931,7 @@ h6 {
       margin-bottom: 0px; }
     .portfolio_details_inner .portfolio_right_text .list li i {
       color: #f1cd09; }
+
 
 /* End Portfolio Details Area css
 ============================================================================================ */
@@ -3068,11 +3073,11 @@ h6 {
   color: #777777;
   margin-bottom: 10px; }
 .social_widget .list li {
-  margin-right: 17px;
+  margin-right: 13px;
   display: inline-block; }
   .social_widget .list li a {
     color: #cccccc;
-    font-size: 14px;
+    font-size: 30px;
     transition: all 300ms linear 0s; }
   .social_widget .list li:last-child {
     margin-right: 0px; }
