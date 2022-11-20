@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired
 from wtforms.fields import DateField, DateTimeField
+from flask_ckeditor import CKEditorField
+
 
 
 class AddProjectForm(FlaskForm):
@@ -13,9 +15,9 @@ class AddProjectForm(FlaskForm):
     github_url = StringField('github url')
     rating = StringField('rating')
     date = DateField('date', format='%Y-%m-%d', validators=[DataRequired()])
-    description = StringField('description', validators=[DataRequired()])
-    challenge = StringField('challenge')
-    solution = StringField('solution')
+    description = CKEditorField('description', validators=[DataRequired()])
+    challenge = CKEditorField('challenge')
+    solution = CKEditorField('solution')
     img_url = StringField('main image', validators=[DataRequired()])
     challenge_img_url = StringField('challenge image')
     submit = SubmitField("Add project")

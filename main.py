@@ -43,8 +43,8 @@ login_manager.init_app(app=app)
 # 6-TODO Adding sqlalchemy db for portfolio projects
 ##Connecting to db
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
-Bootstrap(app)
 ckeditor = CKEditor(app)
+Bootstrap(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///projects.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

@@ -77,15 +77,15 @@
 						</div>
 					</div>
 <!--       				<h3 style="color: #0f1b61">Description</h3>-->
-       				<p> {{ project.description }}</p>
+       				<p> {{ project.description|safe }}</p>
 					{% if project.challenge  %}
 					<h3 style="color: #0f1b61">Challenge</h3>
-					<p> {{ project.challenge }}</p>
+					<p> {{ project.challenge|safe }}</p>
                     <div class="left_img">
 								<img class="img-fluid" src="{{project.challenge_img_url}}" alt="">
 							</div>
 					<h3 style="color: #0f1b61">Solution</h3>
-					<p> {{ project.solution }}</p>
+					<p> {{ project.solution|safe }}</p>
 					{% endif %}
 
         		</div>
