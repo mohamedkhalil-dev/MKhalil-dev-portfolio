@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired
 from wtforms.fields import DateField, DateTimeField
 
@@ -19,3 +19,8 @@ class AddProjectForm(FlaskForm):
     img_url = StringField('main image', validators=[DataRequired()])
     challenge_img_url = StringField('challenge image')
     submit = SubmitField("Add project")
+
+class LoginForm(FlaskForm):
+    email = StringField("Email", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Let me in")
