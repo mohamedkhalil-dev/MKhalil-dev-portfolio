@@ -87,7 +87,9 @@
 					<h3 style="color: #0f1b61">Solution</h3>
 					<p> {{ project.solution|safe }}</p>
 					{% endif %}
-
+{% if current_user.id == 1 %}
+			<a class="btn btn-danger" href="{{url_for('delete_project', project_id=project.id) }}" role="button">Delete Project</a>
+          {% endif %}
         		</div>
         	</div>
         </section>

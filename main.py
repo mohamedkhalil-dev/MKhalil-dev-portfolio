@@ -157,6 +157,14 @@ def add_project():
 
     return render_template('add-project.html', form=form, logged_in=current_user.is_authenticated)
 
+@app.route("/delete/<int:project_id>")
+@login_required
+def delete_project(project_id):
+    project_to_delete = Projects.query.get(project_id)
+    db.session.delete(project_to_delete)
+    db.session.commit()
+    return redirect(url_for('home'))
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     form = LoginForm()
