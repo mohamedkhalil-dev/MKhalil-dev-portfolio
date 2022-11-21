@@ -8,7 +8,7 @@
 # 8-TODO Creating env variables to store passwords
 # 9-TODO using the .gitignore while comitting the files to git and uploading to github
 # 10-TODO Deploying to heruku
-
+import requests
 # Fase-2
 # 11-TODO Adding a login feature with Authentication and hashing password
 # 11-TODO Adding an Add-Project feature from the website itself
@@ -20,7 +20,7 @@ from flask import Flask, render_template, redirect, url_for, flash, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
-
+from requests import Request
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from datetime import datetime
 import os
@@ -165,6 +165,46 @@ def delete_project(project_id):
     db.session.commit()
     return redirect(url_for('home'))
 
+@app.route("/edit-project/<int:project_id>", methods=["GET", "POST"])
+@login_required
+def edit_project(project_id):
+    project = Projects.query.get(project_id)
+    edit_form = AddProjectForm(
+        name=project.name,
+        client=project.client,
+        overview=project.overview,
+        rating=int(project.rating),
+        website=project.website,
+        languages=project.languages,
+        date=project.date,
+        description=project.description,
+        challenge=project.challenge,
+        solution=project.solution,
+        github_url=project.img_url,
+        img_url=project.img_url,
+        challenge_img_url=project.challenge_img_url,
+    )
+    if edit_form.validate_on_submit():
+        project.name = edit_form.name.data
+        project.client = edit_form.client.data
+        project.overview = edit_form.overview.data
+        project.rating = int(edit_form.rating.data)
+        project.website = edit_form.website.data
+        project.languages = edit_form.languages.data
+        project.date = edit_form.date.data
+        project.description = edit_form.description.data
+        project.challenge = edit_form.challenge.data
+        project.solution = edit_form.solution.data
+        project.github_url = edit_form.img_url.data
+        project.img_url = edit_form.img_url.data
+        project.challenge_img_url = edit_form.challenge_img_url.data
+
+        db.session.commit()
+        return redirect(url_for("show_project", project_id=project.id))
+
+    return render_template("add-project.html", form=edit_form, logged_in=current_user.is_authenticated)
+
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     form = LoginForm()
@@ -228,7 +268,7 @@ def single_blog():
     return render_template('single-blog.html')
 
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
     return render_template('contact.html')
 

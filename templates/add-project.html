@@ -1,30 +1,32 @@
 {% import 'bootstrap/wtf.html' as wtf %}
+<!doctype html>
 <html lang="en">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="static/img/MK-favicon-32x32.png" type="image/png">
+        <link rel="icon" href="{{ url_for('static', filename='img/MK-favicon-32x32.png')}}">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600&display=swap" rel="stylesheet">
 
         <title>MK-dev Multi</title>
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="static/css/bootstrap.css">
-        <link rel="stylesheet" href="static/vendors/linericon/style.css">
-        <link rel="stylesheet" href="static/css/font-awesome.min.css">
-        <link rel="stylesheet" href="static/vendors/owl-carousel/owl.carousel.min.css">
-        <link rel="stylesheet" href="static/vendors/lightbox/simpleLightbox.css">
-        <link rel="stylesheet" href="static/vendors/nice-select/css/nice-select.css">
-        <link rel="stylesheet" href="static/vendors/animate-css/animate.css">
-        <link rel="stylesheet" href="static/vendors/flaticon/flaticon.css">
-        <!-- main css -->
-        <link rel="stylesheet" href="static/css/style.css">
-        <link rel="stylesheet" href="static/css/responsive.css">
+
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/linericon/style.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/owl-carousel/owl.carousel.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/lightbox/simpleLightbox.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/nice-select/css/nice-select.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/animate-css/animate.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='vendors/flaticon/flaticon.css')}}">
+<!--         main css-->
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css')}}">
     </head>
     <body>
-        
         <!--================Header Menu Area =================-->
         {% include "header.html" %}
         <!--================Header Menu Area =================-->
