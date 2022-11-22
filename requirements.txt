@@ -1,0 +1,9 @@
+gunicorn == 20.1.0
+Flask==2.2.2
+flask_bootstrap==3.3.7.1
+Flask_CKEditor==0.4.6
+Flask_Login==0.6.2
+flask_sqlalchemy==3.0.2
+flask_wtf==1.0.1
+python-dotenv==0.21.0
+WTForms==3.0.1
