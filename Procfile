@@ -1,3 +1,3 @@
 web:gunicorn main:app
 web:node index.js
-ps:scale web=0
+ps:scale web=1
