@@ -24,9 +24,12 @@
 								<li class="nav-item"><a class="nav-link" href=" {{url_for('about')}} ">About</a></li>
 <!--								<li class="nav-item"><a class="nav-link" href="{{url_for('services')}}">Services</a>-->
 								<li class="nav-item"><a class="nav-link" href="{{url_for('portfolio')}}">Projects</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{url_for('login')}}">Login</a></li>
+
 
 								<li class="nav-item"><a class="nav-link" href="{{url_for('contact')}}">Contact</a></li>
 								{% if current_user.id == 1 %}
+								<li class="nav-item"><a class="nav-link" href="{{url_for('add_project')}}">Add project</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{url_for('logout')}}">logout</a></li>
           {% endif %}
 							</ul>

@@ -8,6 +8,7 @@
 # 8-TODO Creating env variables to store passwords
 # 9-TODO using the .gitignore while comitting the files to git and uploading to github
 # 10-TODO Deploying to heruku
+
 # Fase-2
 # 11-TODO Adding a login feature with Authentication and hashing password
 # 11-TODO Adding an Add-Project feature from the website itself
