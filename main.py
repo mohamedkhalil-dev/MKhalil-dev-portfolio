@@ -20,7 +20,7 @@ from flask import Flask, render_template, redirect, url_for, flash, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
-from requests import Request
+# from requests import Request
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from datetime import datetime
 import os
@@ -31,8 +31,7 @@ load_dotenv()
 SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver', 'Beautiful soup', 'Request', 'WTForms', 'HTML5',
           'CSS', 'Bootstrap', 'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API',
           'Authentication', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
-# ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
-# ADMIN_PASSWORD = "AdminLogin@0"
+
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 app = Flask(__name__)
@@ -46,7 +45,7 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///projects.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
