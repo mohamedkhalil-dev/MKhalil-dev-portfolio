@@ -32,7 +32,7 @@ SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver', 'Beautiful soup', 'Request'
           'CSS', 'Bootstrap', 'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API',
           'Authentication', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
 
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 app = Flask(__name__)
 # 11-TODO Adding a login feature with flask-login
@@ -41,7 +41,7 @@ login_manager.init_app(app=app)
 
 # 6-TODO Adding sqlalchemy db for portfolio projects
 ##Connecting to db
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
