@@ -1,5 +1,5 @@
-psycopg2-binary == 2.9.5
-gunicorn == 20.1.0
+gunicorn==20.1.0
+psycopg2-binary==2.9.5
 Flask==2.2.2
 flask_bootstrap==3.3.7.1
 Flask_CKEditor==0.4.6
