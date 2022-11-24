@@ -185,7 +185,7 @@ def edit_project(project_id):
         description=project.description,
         challenge=project.challenge,
         solution=project.solution,
-        github_url=project.img_url,
+        github_url=project.github_url,
         img_url=project.img_url,
         challenge_img_url=project.challenge_img_url,
     )
@@ -200,7 +200,7 @@ def edit_project(project_id):
         project.description = edit_form.description.data
         project.challenge = edit_form.challenge.data
         project.solution = edit_form.solution.data
-        project.github_url = edit_form.img_url.data
+        project.github_url = edit_form.github_url.data
         project.img_url = edit_form.img_url.data
         project.challenge_img_url = edit_form.challenge_img_url.data
 
