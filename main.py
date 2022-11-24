@@ -20,7 +20,7 @@ from flask import Flask, render_template, redirect, url_for, flash, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
-# from requests import Request
+import random
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from datetime import datetime
 import os
@@ -31,7 +31,12 @@ load_dotenv()
 SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver', 'Beautiful soup', 'Request', 'WTForms', 'HTML5',
           'CSS', 'Bootstrap', 'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API',
           'Authentication', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
-
+QUOTES = [
+    "Programming isn't about what you know; it's about what you can figure out. - Chris Pine",
+"The only way to learn a new programming language is by writing programs in it. - Dennis Ritchie",
+"The most damaging phrase in the language is.. it's always been done this way - Grace Hopper",
+"Don't write better error messages, write code that doesn't need them. - Jason C. McDonald"
+]
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 app = Flask(__name__)
@@ -126,7 +131,8 @@ def logout():
 @app.route('/')
 def home():
     all_projects = Projects.query.all()
-    return render_template('index.html', projects=all_projects, skills=SKILLS)
+    random_quote = random.choice(QUOTES)
+    return render_template('index.html', projects=all_projects, skills=SKILLS, quote=random_quote)
 
 
 
