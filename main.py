@@ -26,6 +26,7 @@ from datetime import datetime
 import os
 from forms import AddProjectForm, LoginForm
 from dotenv import load_dotenv
+
 load_dotenv()
 
 SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver', 'Beautiful soup', 'Request', 'WTForms', 'HTML5',
@@ -33,9 +34,9 @@ SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver', 'Beautiful soup', 'Request'
           'Authentication', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
 QUOTES = [
     "Programming isn't about what you know; it's about what you can figure out. - Chris Pine",
-"The only way to learn a new programming language is by writing programs in it. - Dennis Ritchie",
-"The most damaging phrase in the language is.. it's always been done this way - Grace Hopper",
-"Don't write better error messages, write code that doesn't need them. - Jason C. McDonald"
+    "The only way to learn a new programming language is by writing programs in it. - Dennis Ritchie",
+    "The most damaging phrase in the language is.. it's always been done this way - Grace Hopper",
+    "Don't write better error messages, write code that doesn't need them. - Jason C. McDonald"
 ]
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
@@ -53,13 +54,6 @@ Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite:///projects.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
-
-
-
-
-
-
 
 
 ##Creating db for portfolio projects
@@ -104,7 +98,6 @@ class User(UserMixin, db.Model):
 # )
 
 
-
 # new_user = User(
 #     name="Mohamed",
 #     email="mohamedkhalil.e@gmail.com",
@@ -123,17 +116,18 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
 
 @app.route('/')
 def home():
     all_projects = Projects.query.all()
     random_quote = random.choice(QUOTES)
     return render_template('index.html', projects=all_projects, skills=SKILLS, quote=random_quote)
-
 
 
 @app.route('/add-project', methods=['GET', 'POST'])
@@ -152,7 +146,7 @@ def add_project():
             description=form.description.data,
             challenge=form.challenge.data,
             solution=form.solution.data,
-            github_url=form.img_url.data,
+            github_url=form.github_url.data,
             img_url=form.img_url.data,
             challenge_img_url=form.challenge_img_url.data,
         )
@@ -162,6 +156,7 @@ def add_project():
 
     return render_template('add-project.html', form=form, logged_in=current_user.is_authenticated)
 
+
 @app.route("/delete/<int:project_id>")
 @login_required
 def delete_project(project_id):
@@ -169,6 +164,7 @@ def delete_project(project_id):
     db.session.delete(project_to_delete)
     db.session.commit()
     return redirect(url_for('home'))
+
 
 @app.route("/edit-project/<int:project_id>", methods=["GET", "POST"])
 @login_required
