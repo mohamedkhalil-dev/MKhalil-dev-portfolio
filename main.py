@@ -1,4 +1,4 @@
-# Fase-1
+# Phase-1
 # 1-TODO select and download website template
 # 2-TODO adjust template in "static" & "templates" forlders and relocating the files in new folder locations
 # 3-TODO import flask and render the pages with route decorator
@@ -9,7 +9,7 @@
 # 9-TODO using the .gitignore while comitting the files to git and uploading to github
 # 10-TODO Deploying to heruku
 
-# Fase-2
+# Phase-2
 # 11-TODO Adding a login feature with Authentication and hashing password
 # 11-TODO Adding an Add-Project feature from the website itself
 # 12-TODO Activating blog pages
