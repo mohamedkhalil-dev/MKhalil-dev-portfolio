@@ -6,43 +6,38 @@
 </head>
 <body>
 <!--============Header Menu Area =================-->
-<header class="header_area">
-    <div class="main_menu" id="mainNav">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container box_1620">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <a class="navbar-brand logo_h" href=" {{url_for('home')}} "><img src="static/img/logo-mk3.png"
-                                                                                 style="width:7rem" alt=""></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="{{url_for('home')}}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href=" {{url_for('about')}} ">About</a></li>
-                        <!--								<li class="nav-item"><a class="nav-link" href="{{url_for('services')}}">Services</a>-->
-                        <li class="nav-item"><a class="nav-link" href="{{url_for('portfolio')}}">Projects</a></li>
-<!--                        <li class="nav-item"><a class="nav-link" href="{{url_for('login')}}">Login</a></li>-->
-                        {% if current_user.id != 1 %}
-                        <li class="nav-item"><a class="nav-link" href="{{url_for('login')}}">Login</a></li>
-                        {% endif %}
+        <header class="header_area">
+            <div class="main_menu" id="mainNav">
+            	<nav class="navbar navbar-expand-lg navbar-light">
+					<div class="container box_1620">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<a class="navbar-brand logo_h" href=" {{url_for('home')}} "><img  src="static/img/logo-mk3.png" style="width:7rem" alt=""></a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+							<ul class="nav navbar-nav menu_nav ml-auto">
+								<li class="nav-item active"><a class="nav-link" href="{{url_for('home')}}">Home</a></li>
+								<li class="nav-item"><a class="nav-link" href=" {{url_for('about')}} ">About</a></li>
+<!--								<li class="nav-item"><a class="nav-link" href="{{url_for('services')}}">Services</a>-->
+								<li class="nav-item"><a class="nav-link" href="{{url_for('portfolio')}}">Projects</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{url_for('login')}}">Login</a></li>
 
-                        <li class="nav-item"><a class="nav-link" href="{{url_for('contact')}}">Contact</a></li>
-                        {% if current_user.id == 1 %}
-                        <li class="nav-item"><a class="nav-link" href="{{url_for('add_project')}}">Add project</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{url_for('logout')}}">logout</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
+
+								<li class="nav-item"><a class="nav-link" href="{{url_for('contact')}}">Contact</a></li>
+								{% if current_user.id == 1 %}
+								<li class="nav-item"><a class="nav-link" href="{{url_for('add_project')}}">Add project</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{url_for('logout')}}">logout</a></li>
+          {% endif %}
+							</ul>
+						</div>
+					</div>
+            	</nav>
             </div>
-        </nav>
-    </div>
-</header>
-<!--================Header Menu Area =================-->
+        </header>
+        <!--================Header Menu Area =================-->
 </body>
 </html>

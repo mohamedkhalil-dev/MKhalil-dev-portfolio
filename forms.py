@@ -1,20 +1,14 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, FileField
 from wtforms.validators import DataRequired
-from wtforms.fields import DateField, DateTimeField, SelectMultipleField
+from wtforms.fields import DateField, DateTimeField
 from flask_ckeditor import CKEditorField
-
-#
-SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver','Data Structures', 'Algorithms','Beautiful soup', 'Request', 'WTForms', 'HTML5',
-          'CSS', 'Bootstrap', 'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API',
-          'Authentication', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
-
 
 
 
 class AddProjectForm(FlaskForm):
     name = StringField('project name', validators=[DataRequired()])
-    languages = SelectMultipleField('languages used', choices=SKILLS)
+    languages = StringField('languages used')
     overview = StringField('overview', validators=[DataRequired()])
     client = StringField('client name', validators=[DataRequired()])
     website = StringField('website')
