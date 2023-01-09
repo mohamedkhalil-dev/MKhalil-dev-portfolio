@@ -22,10 +22,29 @@ from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 import random
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-from datetime import datetime
 import os
 from forms import AddProjectForm, LoginForm
 from dotenv import load_dotenv
+import requests
+
+response = requests.get(url='https://api.github.com/users/Tic-Tac-Toe/starred')
+def get_github_repo_stars_count(link):
+    """
+        split github url, grab project name then use the github api to get the project's stats
+        return stars int type
+    """
+    headers = {
+        'USERNAME': os.environ.get('GITHUB_TOKEN')
+    }
+    new_link = link.split('https://github.com/mohamedkhalil-dev/')[1]
+    response = requests.get(url='https://api.github.com/users/mohamedkhalil-dev/repos', headers=headers)
+    data = response.json()
+    for repos in data:
+        if repos["name"] == new_link:
+            stars_count = repos["stargazers_count"]
+            return stars_count
+
+
 
 load_dotenv()
 
@@ -51,7 +70,7 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite:///projects.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///projects.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -65,8 +84,8 @@ class Projects(db.Model):
     overview = db.Column(db.String(250), nullable=False)
     client = db.Column(db.String(50))
     website = db.Column(db.String(100))
-    github_url = db.Column(db.String(100))
-    rating = db.Column(db.Float)
+    github_url = db.Column(db.String(100), nullable=False)
+    rating = db.Column(db.String)
     date = db.Column(db.DateTime)
     description = db.Column(db.Text, nullable=False)
     challenge = db.Column(db.Text)
@@ -82,9 +101,19 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(100))
 
+class Skill(UserMixin, db.Model):
+    __tablename__ = "skills"
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(50))
+    name = db.Column(db.String(50))
+
+# app.app_context().push()
+
+
 
 # with app.app_context():
 #     db.create_all()
+
 
 # new_project = Projects(
 #     name="Phone new",
@@ -96,13 +125,28 @@ class User(UserMixin, db.Model):
 #     img_url="https://scoutlife.org/wp-content/uploads/2007/02/morsecode-1.jpg",
 #     challenge_img_url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVxQ78Og8XPDvmao18jrzMsnnaNGkZwh1iQ&usqp=CAU"
 # )
+# with app.app_context():
+#     db.session.add(new_project)
 
 
-# new_user = User(
-#     name="Mohamed",
-#     email="mohamedkhalil.e@gmail.com",
-#     password="AdminLogin@0"
+
+# new_skill = Skill(
+#     category='1',
+#     name='11'
 # )
+# with app.app_context():
+#     db.session.add(new_skill)
+# with app.app_context():
+#     db.session.commit()
+
+# SKILLS_list = {
+#                 'Back-end': ['Python 3', 'Flask', 'Selenium Webdriver','Data Structures', 'Algorithms','Beautiful soup', 'Request', 'WTForms',  'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API','Authentication'],
+#                 'Front-end': ['HTML5', 'CSS', 'Bootstrap'],
+#                 'Graphic design': ['Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
+#               }
+
+
+
 
 # with app.app_context():
 #     db.session.add(new_project)
@@ -125,9 +169,10 @@ def logout():
 
 @app.route('/')
 def home():
+    all_skills = Skill.query.all()
     all_projects = Projects.query.all()
     random_quote = random.choice(QUOTES)
-    return render_template('index.html', projects=all_projects, skills=SKILLS, quote=random_quote)
+    return render_template('index.html', skills=all_skills, projects=all_projects, quote=random_quote)
 
 
 @app.route('/add-project', methods=['GET', 'POST'])
@@ -139,9 +184,9 @@ def add_project():
             name=form.name.data,
             client=form.client.data,
             overview=form.overview.data,
-            rating=int(form.rating.data),
+            rating=form.rating.data,
             website=form.website.data,
-            languages=form.languages.data,
+            languages=form.languages.data[0],
             date=form.date.data,
             description=form.description.data,
             challenge=form.challenge.data,
@@ -174,7 +219,7 @@ def edit_project(project_id):
         name=project.name,
         client=project.client,
         overview=project.overview,
-        rating=int(project.rating),
+        rating=project.rating,
         website=project.website,
         languages=project.languages,
         date=project.date,
@@ -189,9 +234,9 @@ def edit_project(project_id):
         project.name = edit_form.name.data
         project.client = edit_form.client.data
         project.overview = edit_form.overview.data
-        project.rating = int(edit_form.rating.data)
+        project.rating = edit_form.rating.data
         project.website = edit_form.website.data
-        project.languages = edit_form.languages.data
+        project.languages = edit_form.languages.data[0]
         project.date = edit_form.date.data
         project.description = edit_form.description.data
         project.challenge = edit_form.challenge.data
@@ -208,24 +253,33 @@ def edit_project(project_id):
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        email = form.email.data
+    """"
+    if user is logged-in > will be directed to home-screen
+    // if user is logged-out > will be directed to login-screen
+    """
+    # redirecting user to home if logged-in
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
 
-        user_to_check = User.query.filter_by(email=email).first()
+    else:
+        form = LoginForm()
+        if form.validate_on_submit():
+            email = form.email.data
 
-        if user_to_check and form.password.data == ADMIN_PASSWORD:
-            login_user(user_to_check)
-            return redirect(url_for("add_project"))
+            user_to_check = User.query.filter_by(email=email).first()
 
-        elif not user_to_check:
-            flash("This email is not registered")
-            return redirect(url_for("login"))
-        else:
-            flash("This password is incorrect")
-            return redirect(url_for("login"))
+            if user_to_check and form.password.data == ADMIN_PASSWORD:
+                login_user(user_to_check)
+                return redirect(url_for("add_project"))
 
-    return render_template("admin.html", form=form, logged_in=current_user.is_authenticated)
+            elif not user_to_check:
+                flash("This email is not registered")
+                return redirect(url_for("login"))
+            else:
+                flash("This password is incorrect")
+                return redirect(url_for("login"))
+
+        return render_template("admin.html", form=form, logged_in=current_user.is_authenticated)
 
 
 @app.route('/about')
@@ -252,7 +306,11 @@ def portfolio():
 @app.route('/project-details/<int:project_id>', methods=["GET", "Post"])
 def show_project(project_id):
     requested_project = Projects.query.get(project_id)
-    return render_template('portfolio-details.html', project=requested_project)
+    project_github_url = requested_project.github_url
+
+    github_stars = get_github_repo_stars_count(project_github_url)
+    print(github_stars)
+    return render_template('portfolio-details.html', project=requested_project, github_stars=github_stars)
 
 
 # @app.route('/portfolio-details')
