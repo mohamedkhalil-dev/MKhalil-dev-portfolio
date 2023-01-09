@@ -1,15 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, FileField
+from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired
-from wtforms.fields import DateField, DateTimeField, SelectMultipleField
+from wtforms.fields import DateField, SelectMultipleField
 from flask_ckeditor import CKEditorField
 
 #
-SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver','Data Structures', 'Algorithms','Beautiful soup', 'Request', 'WTForms', 'HTML5',
+SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver', 'Data Structures', 'Algorithms', 'Beautiful soup', 'Request',
+          'WTForms', 'HTML5',
           'CSS', 'Bootstrap', 'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API',
           'Authentication', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
-
-
 
 
 class AddProjectForm(FlaskForm):
@@ -27,6 +26,7 @@ class AddProjectForm(FlaskForm):
     img_url = StringField('main image', validators=[DataRequired()])
     challenge_img_url = StringField('challenge image')
     submit = SubmitField("Add project")
+
 
 class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])

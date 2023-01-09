@@ -1,13 +1,13 @@
 # Phase-1
 # 1-TODO select and download website template
-# 2-TODO adjust template in "static" & "templates" forlders and relocating the files in new folder locations
+# 2-TODO adjust template in "static" & "templates" folders and relocating the files in new folder locations
 # 3-TODO import flask and render the pages with route decorator
 # 4-TODO creating a header and footer html files including it using flask(ninja) instead of duplicating their codes in each file
 # 5-TODO customizing the fonts/bg colors and adding new pics to the template
 # 7-TODO Rendering portfolio projects using JINJA2 inside html files
 # 8-TODO Creating env variables to store passwords
-# 9-TODO using the .gitignore while comitting the files to git and uploading to github
-# 10-TODO Deploying to heruku
+# 9-TODO using the .gitignore while committing the files to git and uploading to github
+# 10-TODO Deploying to Heroku
 
 # Phase-2
 # 11-TODO Adding a login feature with Authentication and hashing password
@@ -16,7 +16,7 @@
 # 11-TODO Adding an Add-blog feature from the website itself
 
 
-from flask import Flask, render_template, redirect, url_for, flash, abort
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
@@ -27,7 +27,6 @@ from forms import AddProjectForm, LoginForm
 from dotenv import load_dotenv
 import requests
 
-response = requests.get(url='https://api.github.com/users/Tic-Tac-Toe/starred')
 
 load_dotenv()
 
@@ -45,7 +44,7 @@ login_manager = LoginManager()
 login_manager.init_app(app=app)
 
 # 6-TODO Adding sqlalchemy db for portfolio projects
-##Connecting to db
+# Connecting to db
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
@@ -55,10 +54,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-##Creating github api function
+# Creating gitHub api function
 def get_github_repo_stars_count(link):
     """
-        split github url, grab project name then use the github api to get the project's stats
+        split gitHub url, grab project name then use the gitHub api to get the project's stats
         return stars int type
     """
     headers = {
@@ -73,7 +72,7 @@ def get_github_repo_stars_count(link):
             return stars_count
 
 
-##Creating db for portfolio projects
+# Creating db for portfolio projects
 class Projects(db.Model):
     __tablename__ = "projects"
     id = db.Column(db.Integer, primary_key=True)
@@ -137,11 +136,10 @@ class Skill(UserMixin, db.Model):
 # with app.app_context():
 #     db.session.commit()
 
-# SKILLS_list = {
-#                 'Back-end': ['Python 3', 'Flask', 'Selenium Webdriver','Data Structures', 'Algorithms','Beautiful soup', 'Request', 'WTForms',  'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API','Authentication'],
-#                 'Front-end': ['HTML5', 'CSS', 'Bootstrap'],
-#                 'Graphic design': ['Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
-#               }
+# SKILLS_list = { 'Back-end': ['Python 3', 'Flask', 'Selenium Webdriver','Data Structures', 'Algorithms','Beautiful
+# soup', 'Request', 'WTForms',  'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API','Authentication'],
+# 'Front-end': ['HTML5', 'CSS', 'Bootstrap'], 'Graphic design': ['Adobe Photoshop', 'Adobe Illustrator',
+# 'Adobe Indesign'] }
 
 
 # with app.app_context():
