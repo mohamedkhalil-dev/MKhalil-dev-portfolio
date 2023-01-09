@@ -48,7 +48,7 @@ def get_github_repo_stars_count(link):
 
 load_dotenv()
 
-SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver','Data Structures', 'Algorithms','Beautiful soup', 'Request', 'WTForms', 'HTML5',
+SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver','Data Structures', 'Algorithms' ,'Beautiful soup', 'Request', 'WTForms', 'HTML5',
           'CSS', 'Bootstrap', 'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API',
           'Authentication', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
 QUOTES = [
