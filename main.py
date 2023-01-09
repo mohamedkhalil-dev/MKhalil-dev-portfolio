@@ -36,11 +36,11 @@ def get_github_repo_stars_count(link):
     headers = {
         'USERNAME': os.getenv('GITHUB_TOKEN')
     }
-    new_link = link.split('https://github.com/mohamedkhalil-dev/')[1]
+    project_name = link.split('https://github.com/mohamedkhalil-dev/')[1]
     response = requests.get(url='https://api.github.com/users/mohamedkhalil-dev/repos', headers=headers)
     data = response.json()
     for repos in data:
-        if repos["name"] == new_link:
+        if repos["name"] == project_name:
             stars_count = repos["stargazers_count"]
             return stars_count
 
