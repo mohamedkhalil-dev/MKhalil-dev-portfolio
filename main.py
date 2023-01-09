@@ -28,29 +28,9 @@ from dotenv import load_dotenv
 import requests
 
 response = requests.get(url='https://api.github.com/users/Tic-Tac-Toe/starred')
-def get_github_repo_stars_count(link):
-    """
-        split github url, grab project name then use the github api to get the project's stats
-        return stars int type
-    """
-    headers = {
-        'USERNAME': os.getenv('GITHUB_TOKEN')
-    }
-    project_name = link.split('https://github.com/mohamedkhalil-dev/')[1]
-    response = requests.get(url='https://api.github.com/users/mohamedkhalil-dev/repos', headers=headers)
-    data = response.json()
-    for repos in data:
-        if repos["name"] == project_name:
-            stars_count = repos["stargazers_count"]
-            return stars_count
-
-
 
 load_dotenv()
 
-SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver','Data Structures', 'Algorithms' ,'Beautiful soup', 'Request', 'WTForms', 'HTML5',
-          'CSS', 'Bootstrap', 'Pandas', 'Numpy', 'Matplotlib', 'Rest', 'SQLite', 'Plotly', 'API',
-          'Authentication', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
 QUOTES = [
     "Programming isn't about what you know; it's about what you can figure out. - Chris Pine",
     "The only way to learn a new programming language is by writing programs in it. - Dennis Ritchie",
@@ -73,6 +53,24 @@ Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite:///projects.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+
+##Creating github api function
+def get_github_repo_stars_count(link):
+    """
+        split github url, grab project name then use the github api to get the project's stats
+        return stars int type
+    """
+    headers = {
+        'USERNAME': os.getenv('GITHUB_TOKEN')
+    }
+    project_name = link.split('https://github.com/mohamedkhalil-dev/')[1]
+    response = requests.get(url='https://api.github.com/users/mohamedkhalil-dev/repos', headers=headers)
+    data = response.json()
+    for repos in data:
+        if repos["name"] == project_name:
+            stars_count = repos["stargazers_count"]
+            return stars_count
 
 
 ##Creating db for portfolio projects
@@ -101,14 +99,15 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(100))
 
+
 class Skill(UserMixin, db.Model):
     __tablename__ = "skills"
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(50))
     name = db.Column(db.String(50))
 
-# app.app_context().push()
 
+# app.app_context().push()
 
 
 # with app.app_context():
@@ -129,7 +128,6 @@ class Skill(UserMixin, db.Model):
 #     db.session.add(new_project)
 
 
-
 # new_skill = Skill(
 #     category='1',
 #     name='11'
@@ -144,8 +142,6 @@ class Skill(UserMixin, db.Model):
 #                 'Front-end': ['HTML5', 'CSS', 'Bootstrap'],
 #                 'Graphic design': ['Adobe Photoshop', 'Adobe Illustrator', 'Adobe Indesign']
 #               }
-
-
 
 
 # with app.app_context():
@@ -284,7 +280,8 @@ def login():
 
 @app.route('/about')
 def about():
-    return render_template('about-us.html', skills=SKILLS)
+    all_skills = Skill.query.all()
+    return render_template('about-us.html', skills=all_skills)
 
 
 @app.route('/services')
