@@ -65,13 +65,19 @@
 								<h4>{{project.name}}</h4>
 								<p> {{project.overview}}</p>
 								<ul class="list">
-									<li><span>Rating</span>: {{project.rating }} <i class="fa fa-star"></i></li>
+<!--									<li><span>Rating</span>: {{ project.rating }} <i class="fa fa-star"></i></li>-->
+									{% if github_stars==0 or github_stars==None %}
+									<li><span>Rating</span>: {{ project.rating }} <i class="fa fa-star"></i></li>
+									{% else %}
+									<li><span>Github Rating</span>: {{ github_stars }} <i class="fa fa-star"></i></li>
+									{% endif %}
 									<li><span>Client</span>: {{project.client}}  </li>
 									{% if project.website %}
 									<li><span>Website</span>:  {{project.website}}</li>
 									{% endif %}
 									<li><span>GitHub-link</span>:  <a href="{{project.github_url}}">check code page</a></li>
 									<li><span>Completed</span>:  {{ project.date.month }}/{{ project.date.year }}</li>
+									<li><span>Languages</span>:  {{ project.languages }}</li>
 								</ul>
 							</div>
 						</div>
