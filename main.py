@@ -28,6 +28,7 @@ from dotenv import load_dotenv
 import requests
 
 
+
 load_dotenv()
 
 QUOTES = [
@@ -64,12 +65,9 @@ def get_github_repo_stars_count(link):
         'USERNAME': os.getenv('GITHUB_TOKEN')
     }
     project_name = link.split('https://github.com/mohamedkhalil-dev/')[1]
-    response = requests.get(url='https://api.github.com/users/mohamedkhalil-dev/repos', headers=headers)
+    response = requests.get(url=f'https://api.github.com/repos/mohamedkhalil-dev/{project_name}', headers=headers)
     data = response.json()
-    for repos in data:
-        if repos["name"] == project_name:
-            stars_count = repos["stargazers_count"]
-            return stars_count
+    return data["stargazers_count"]
 
 
 # Creating db for portfolio projects

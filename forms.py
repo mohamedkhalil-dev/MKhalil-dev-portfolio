@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired
 from wtforms.fields import DateField, SelectMultipleField
 from flask_ckeditor import CKEditorField
 
+
 #
 SKILLS = ['Python 3', 'Flask', 'Selenium Webdriver', 'Data Structures', 'Algorithms', 'Beautiful soup', 'Request',
           'WTForms', 'HTML5',
