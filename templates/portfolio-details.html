@@ -73,7 +73,7 @@
 									{% endif %}
 									<li><span>Client</span>: {{project.client}}  </li>
 									{% if project.website %}
-									<li><span>Website</span>:  {{project.website}}</li>
+									<li><span>Website</span>:  <a href="{{project.website}}">{{project.website}}</a></li>
 									{% endif %}
 									<li><span>GitHub-link</span>:  <a href="{{project.github_url}}">check code page</a></li>
 									<li><span>Completed</span>:  {{ project.date.month }}/{{ project.date.year }}</li>
